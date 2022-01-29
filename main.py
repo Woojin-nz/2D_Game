@@ -3,7 +3,7 @@ from pygame.locals import *
 
 pygame.init()
 
-SIZE = WIDTH, HEIGHT = 1920, 1080
+SIZE = WIDTH, HEIGHT = 1000,500
 FPS = 60
 FramePerSec = pygame.time.Clock()
 pygame.display.set_caption("2D Shooter")
@@ -59,14 +59,14 @@ class Player(pygame.sprite.Sprite):
         if self.rect.top > 0:
             if pressed_keys[K_UP]:
                 self.rect.move_ip(0, -5)
-        if self.rect.bottom < 1080:
+        if self.rect.bottom < 500:
             if pressed_keys[K_DOWN]:
                 self.rect.move_ip(0, 5)
 
         if self.rect.left > 0:
             if pressed_keys[K_LEFT]:
                 self.rect.move_ip(-5, 0)
-        if self.rect.right < 1920:
+        if self.rect.right < 1000:
             if pressed_keys[K_RIGHT]:
                 self.rect.move_ip(5, 0)
 
