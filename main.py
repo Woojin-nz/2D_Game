@@ -104,7 +104,9 @@ while running:
         for entity in all_sprites:
             entity.kill()
 
-        while True:
+        space_loop = ""
+
+        while space_loop == "":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -113,8 +115,12 @@ while running:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         screen.fill(WHITE)
-                        for entity in all_sprites:
-                            entity.alive()
+                        player = Player(position=(350, 220))
+                        monster = Hunter(position=(680, 400))
+                        enemies.add(monster)
+                        all_sprites.add(player)
+                        all_sprites.add(monster)
+                        space_loop = "a"
 
             pygame.display.update()
 
