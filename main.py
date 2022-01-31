@@ -16,7 +16,7 @@ TRANSPARENT = (0, 0, 0, 0)
 screen = pygame.display.set_mode(SIZE)
 screen_rect = screen.get_rect()
 clock = pygame.time.Clock()
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.SysFont(None, 60)
 text = font.render('Press "SPACE" to restart', True, YELLOW, RED)
 vic = font.render("CONGRATULATIONS!!", True, YELLOW, RED)
 textRect = text.get_rect()
@@ -181,6 +181,15 @@ monster35 = Hunter(position=(1280, 900))
 monster36 = Hunter(position=(1280, 1000))
 
 
+monster37 = Hunter(position=(200, 1000))
+monster38 = Hunter(position=(400, 1000))
+monster39 = Hunter(position=(600, 1000))
+# monster40 = Hunter(position=(800, 1000))
+# monster41 = Hunter(position=(1000, 1000))
+# monster42 = Hunter(position=(1200, 1000))
+
+
+
 
 bullet_pos = player.rect.center
 bullet_right = right_Bullet(bullet_pos)
@@ -278,6 +287,12 @@ while running:
     monster34.update(player)
     monster35.update(player)
     monster36.update(player)
+    monster37.update(player)
+    monster38.update(player)
+    monster39.update(player)
+    # monster40.update(player)
+    # monster41.update(player)
+    # monster42.update(player)
 
 
     bullet_right.update()
@@ -364,7 +379,12 @@ while running:
         monster35 = Hunter(position=(1280, 900))
         monster36 = Hunter(position=(1280, 1000))
 
-
+        monster37 = Hunter(position=(200, 1000))
+        monster38 = Hunter(position=(400, 1000))
+        monster39 = Hunter(position=(600, 1000))
+        # monster40 = Hunter(position=(800, 1000))
+        # monster41 = Hunter(position=(1000, 1000))
+        # monster42 = Hunter(position=(1200, 1000))
 
         all_sprites.add(monster)
         all_sprites.add(monster1)
@@ -403,6 +423,12 @@ while running:
         all_sprites.add(monster34)
         all_sprites.add(monster35)
         all_sprites.add(monster36)
+        all_sprites.add(monster37)
+        all_sprites.add(monster38)
+        all_sprites.add(monster39)
+        # all_sprites.add(monster40)
+        # all_sprites.add(monster41)
+        # all_sprites.add(monster42)
 
         enemies.add(monster)
         enemies.add(monster1)
@@ -441,6 +467,12 @@ while running:
         enemies.add(monster34)
         enemies.add(monster35)
         enemies.add(monster36)
+        enemies.add(monster37)
+        enemies.add(monster38)
+        enemies.add(monster39)
+        # enemies.add(monster40)
+        # enemies.add(monster41)
+        # enemies.add(monster42)
 
         number_of_enemy = len(enemies)
         a += 1
