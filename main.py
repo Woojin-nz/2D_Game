@@ -34,16 +34,16 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-asset_url = resource_path('assets\icon.png')
+asset_url = resource_path('assets/icon.png')
 icon_asset = pygame.image.load(asset_url)
 
-asset_url1 = resource_path('assets\enemy.png')
+asset_url1 = resource_path('assets/enemy.png')
 hero_asset1 = pygame.image.load(asset_url1)
 
 asset_url2 = resource_path('assets/bullet.png')
 hero_asset2 = pygame.image.load(asset_url2)
 
-asset_url3 = resource_path('assets\Player.png')
+asset_url3 = resource_path('assets/Player.png')
 hero_asset3 = pygame.image.load(asset_url3)
 
 pew = pygame.mixer.Sound("assets/gun.mp3")
