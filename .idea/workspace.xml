@@ -5,11 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f32110a7-9da3-4349-984b-be392ab2a835" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/2D_Rogue_Like_Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2D_Rogue_Like_Game.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bullet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/enemy.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -33,7 +33,7 @@ defeat = pygame.mixer.Sound("assets/defeat.mp3")
 mixer.init
 
 mixer.music.load("assets/background.mp3")
-mixer.music.play()
+mixer.music.play(-1)
 mixer.music.set_volume(0.025)
 
 
