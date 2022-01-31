@@ -1,4 +1,4 @@
-import pygame, sys, contextlib
+import pygame, sys, contextlib, os
 from pygame.locals import *
 from pygame import mixer
 
@@ -23,6 +23,28 @@ textRect = text.get_rect()
 textRect.center = (WIDTH // 2, HEIGHT // 2)
 icon = pygame.image.load("assets/icon.png")
 pygame.display.set_icon(icon)
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+asset_url = resource_path('assets/icon.png')
+icon_asset = pygame.image.load(asset_url)
+
+asset_url1 = resource_path('assets/enemy.png')
+hero_asset1 = pygame.image.load(asset_url1)
+
+asset_url2 = resource_path('assets/bullet.png')
+hero_asset2 = pygame.image.load(asset_url2)
+
+asset_url3 = resource_path('assets/Player.png')
+hero_asset3 = pygame.image.load(asset_url3)
+
+
 
 
 pew = pygame.mixer.Sound("assets/gun.mp3")
@@ -158,21 +180,7 @@ monster34 = Hunter(position=(1280, 800))
 monster35 = Hunter(position=(1280, 900))
 monster36 = Hunter(position=(1280, 1000))
 
-monster37 = Hunter(position=(1280, 1000))
-monster38 = Hunter(position=(1280, 1000))
-monster39 = Hunter(position=(1280, 1000))
-monster40 = Hunter(position=(1280, 1000))
-monster41 = Hunter(position=(1280, 1000))
-monster42 = Hunter(position=(300, 1000))
-monster43 = Hunter(position=(400, 1000))
-monster44 = Hunter(position=(500, 1000))
-monster45 = Hunter(position=(600, 1000))
-monster46 = Hunter(position=(700, 1000))
-monster47 = Hunter(position=(800, 1000))
-monster48 = Hunter(position=(900, 1000))
-monster49 = Hunter(position=(1000, 1000))
-monster50 = Hunter(position=(1100, 1000))
-monster51 = Hunter(position=(1200, 1000))
+
 
 bullet_pos = player.rect.center
 bullet_right = right_Bullet(bullet_pos)
@@ -270,21 +278,7 @@ while running:
     monster34.update(player)
     monster35.update(player)
     monster36.update(player)
-    monster37.update(player)
-    monster38.update(player)
-    monster39.update(player)
-    monster40.update(player)
-    monster41.update(player)
-    monster42.update(player)
-    monster43.update(player)
-    monster44.update(player)
-    monster45.update(player)
-    monster46.update(player)
-    monster47.update(player)
-    monster48.update(player)
-    monster49.update(player)
-    monster50.update(player)
-    monster51.update(player)
+
 
     bullet_right.update()
     bullet_left.update()
@@ -370,21 +364,7 @@ while running:
         monster35 = Hunter(position=(1280, 900))
         monster36 = Hunter(position=(1280, 1000))
 
-        monster37 = Hunter(position=(1280, 1000))
-        monster38 = Hunter(position=(1280, 1000))
-        monster39 = Hunter(position=(1280, 1000))
-        monster40 = Hunter(position=(1280, 1000))
-        monster41 = Hunter(position=(1280, 1000))
-        monster42 = Hunter(position=(300, 1000))
-        monster43 = Hunter(position=(400, 1000))
-        monster44 = Hunter(position=(500, 1000))
-        monster45 = Hunter(position=(600, 1000))
-        monster46 = Hunter(position=(700, 1000))
-        monster47 = Hunter(position=(800, 1000))
-        monster48 = Hunter(position=(900, 1000))
-        monster49 = Hunter(position=(1000, 1000))
-        monster50 = Hunter(position=(1100, 1000))
-        monster51 = Hunter(position=(1200, 1000))
+
 
         all_sprites.add(monster)
         all_sprites.add(monster1)
@@ -423,21 +403,7 @@ while running:
         all_sprites.add(monster34)
         all_sprites.add(monster35)
         all_sprites.add(monster36)
-        all_sprites.add(monster37)
-        all_sprites.add(monster38)
-        all_sprites.add(monster39)
-        all_sprites.add(monster40)
-        all_sprites.add(monster41)
-        all_sprites.add(monster42)
-        all_sprites.add(monster43)
-        all_sprites.add(monster44)
-        all_sprites.add(monster45)
-        all_sprites.add(monster46)
-        all_sprites.add(monster47)
-        all_sprites.add(monster48)
-        all_sprites.add(monster49)
-        all_sprites.add(monster50)
-        all_sprites.add(monster51)
+
         enemies.add(monster)
         enemies.add(monster1)
         enemies.add(monster2)
@@ -475,21 +441,6 @@ while running:
         enemies.add(monster34)
         enemies.add(monster35)
         enemies.add(monster36)
-        enemies.add(monster37)
-        enemies.add(monster38)
-        enemies.add(monster39)
-        enemies.add(monster40)
-        enemies.add(monster41)
-        enemies.add(monster42)
-        enemies.add(monster43)
-        enemies.add(monster44)
-        enemies.add(monster45)
-        enemies.add(monster46)
-        enemies.add(monster47)
-        enemies.add(monster48)
-        enemies.add(monster49)
-        enemies.add(monster50)
-        enemies.add(monster51)
 
         number_of_enemy = len(enemies)
         a += 1
