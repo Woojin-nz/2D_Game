@@ -24,6 +24,7 @@ textRect.center = (WIDTH // 2, HEIGHT // 2)
 icon = pygame.image.load("assets/icon.png")
 pygame.display.set_icon(icon)
 
+
 def resource_path(relative_path):
     try:
         base_path = sys._MEIPASS
@@ -32,20 +33,18 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
-asset_url = resource_path('assets/icon.png')
+
+asset_url = resource_path('assets\icon.png')
 icon_asset = pygame.image.load(asset_url)
 
-asset_url1 = resource_path('assets/enemy.png')
+asset_url1 = resource_path('assets\enemy.png')
 hero_asset1 = pygame.image.load(asset_url1)
 
 asset_url2 = resource_path('assets/bullet.png')
 hero_asset2 = pygame.image.load(asset_url2)
 
-asset_url3 = resource_path('assets/Player.png')
+asset_url3 = resource_path('assets\Player.png')
 hero_asset3 = pygame.image.load(asset_url3)
-
-
-
 
 pew = pygame.mixer.Sound("assets/gun.mp3")
 bug_death = pygame.mixer.Sound("assets/bug.mp3")
@@ -58,9 +57,9 @@ mixer.music.load("assets/background.mp3")
 mixer.music.play(-1)
 mixer.music.set_volume(0.025)
 
-
 with contextlib.redirect_stdout(None):
     import pygame
+
 
 class Hunter(pygame.sprite.Sprite):
 
@@ -180,16 +179,12 @@ monster34 = Hunter(position=(1280, 800))
 monster35 = Hunter(position=(1280, 900))
 monster36 = Hunter(position=(1280, 1000))
 
-
 monster37 = Hunter(position=(200, 1000))
 monster38 = Hunter(position=(400, 1000))
 monster39 = Hunter(position=(600, 1000))
-# monster40 = Hunter(position=(800, 1000))
+monster40 = Hunter(position=(800, 1000))
 # monster41 = Hunter(position=(1000, 1000))
-# monster42 = Hunter(position=(1200, 1000))
-
-
-
+monster42 = Hunter(position=(1200, 1000))
 
 bullet_pos = player.rect.center
 bullet_right = right_Bullet(bullet_pos)
@@ -240,7 +235,6 @@ while running:
 
             pygame.mixer.Sound.play(pew)
 
-
             bullet_pos = player.rect.center
             bullet_right = right_Bullet(bullet_pos)
             bullet_left = left_Bullet(bullet_pos)
@@ -290,10 +284,9 @@ while running:
     monster37.update(player)
     monster38.update(player)
     monster39.update(player)
-    # monster40.update(player)
+    monster40.update(player)
     # monster41.update(player)
-    # monster42.update(player)
-
+    monster42.update(player)
 
     bullet_right.update()
     bullet_left.update()
@@ -382,9 +375,9 @@ while running:
         monster37 = Hunter(position=(200, 1000))
         monster38 = Hunter(position=(400, 1000))
         monster39 = Hunter(position=(600, 1000))
-        # monster40 = Hunter(position=(800, 1000))
+        monster40 = Hunter(position=(800, 1000))
         # monster41 = Hunter(position=(1000, 1000))
-        # monster42 = Hunter(position=(1200, 1000))
+        monster42 = Hunter(position=(1200, 1000))
 
         all_sprites.add(monster)
         all_sprites.add(monster1)
@@ -426,9 +419,9 @@ while running:
         all_sprites.add(monster37)
         all_sprites.add(monster38)
         all_sprites.add(monster39)
-        # all_sprites.add(monster40)
+        all_sprites.add(monster40)
         # all_sprites.add(monster41)
-        # all_sprites.add(monster42)
+        all_sprites.add(monster42)
 
         enemies.add(monster)
         enemies.add(monster1)
@@ -470,9 +463,9 @@ while running:
         enemies.add(monster37)
         enemies.add(monster38)
         enemies.add(monster39)
-        # enemies.add(monster40)
+        enemies.add(monster40)
         # enemies.add(monster41)
-        # enemies.add(monster42)
+        enemies.add(monster42)
 
         number_of_enemy = len(enemies)
         a += 1
@@ -535,7 +528,6 @@ while running:
 
             pygame.display.update()
     while end == "":
-
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
