@@ -1,5 +1,6 @@
-import pygame, sys, random
+import pygame, sys, contextlib
 from pygame.locals import *
+from pygame import mixer
 
 pygame.init()
 
@@ -17,17 +18,34 @@ screen_rect = screen.get_rect()
 clock = pygame.time.Clock()
 font = pygame.font.Font('freesansbold.ttf', 32)
 text = font.render('Press "SPACE" to restart', True, YELLOW, RED)
-vic = font.render("YOU WON!", True, YELLOW,RED)
+vic = font.render("CONGRATULATIONS!!", True, YELLOW, RED)
 textRect = text.get_rect()
 textRect.center = (WIDTH // 2, HEIGHT // 2)
+icon = pygame.image.load("assets/icon.png")
+pygame.display.set_icon(icon)
 
+
+pew = pygame.mixer.Sound("assets/gun.mp3")
+bug_death = pygame.mixer.Sound("assets/bug.mp3")
+congrat = pygame.mixer.Sound("assets/congratz.mp3")
+death = pygame.mixer.Sound("assets/death.mp3")
+defeat = pygame.mixer.Sound("assets/defeat.mp3")
+mixer.init
+
+mixer.music.load("assets/background.mp3")
+mixer.music.play()
+mixer.music.set_volume(0.025)
+
+
+with contextlib.redirect_stdout(None):
+    import pygame
 
 class Hunter(pygame.sprite.Sprite):
 
     def __init__(self, position):
         super(Hunter, self).__init__()
 
-        self.image = pygame.image.load("Enemy.png")
+        self.image = pygame.image.load("assets/Enemy.png")
         self.rect = self.image.get_rect(topleft=position)
         self.position = pygame.math.Vector2(position)
         self.speed = 2
@@ -49,7 +67,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, position):
         super(Player, self).__init__()
 
-        self.image = pygame.image.load("Player.png")
+        self.image = pygame.image.load("assets/Player.png")
         self.rect = self.image.get_rect(center=screen_rect.center)
 
         self.position = pygame.math.Vector2(position)
@@ -77,7 +95,7 @@ class right_Bullet(pygame.sprite.Sprite):
     def __init__(self, position):
         super(right_Bullet, self).__init__()
 
-        self.image = pygame.image.load("bullet.png")
+        self.image = pygame.image.load("assets/bullet.png")
         self.rect = self.image.get_rect(center=position)
 
     def update(self):
@@ -91,7 +109,7 @@ class left_Bullet(pygame.sprite.Sprite):
     def __init__(self, position):
         super(left_Bullet, self).__init__()
 
-        self.image = pygame.image.load("bullet.png")
+        self.image = pygame.image.load("assets/bullet.png")
         self.rect = self.image.get_rect(center=position)
 
     def update(self):
@@ -105,15 +123,15 @@ monster = Hunter(position=(0, 0))
 monster1 = Hunter(position=(1280, 1000))
 monster2 = Hunter(position=(1280, 0))
 monster3 = Hunter(position=(0, 1000))
-monster4 = Hunter(position=(0,100))
-monster5 = Hunter(position=(0,200))
-monster6 = Hunter(position=(0,300))
-monster7 = Hunter(position=(0,400))
-monster8 = Hunter(position=(0,500))
-monster9 = Hunter(position=(0,600))
-monster10 = Hunter(position=(0,700))
-monster11 = Hunter(position=(0,800))
-monster12 = Hunter(position=(0,900))
+monster4 = Hunter(position=(0, 100))
+monster5 = Hunter(position=(0, 200))
+monster6 = Hunter(position=(0, 300))
+monster7 = Hunter(position=(0, 400))
+monster8 = Hunter(position=(0, 500))
+monster9 = Hunter(position=(0, 600))
+monster10 = Hunter(position=(0, 700))
+monster11 = Hunter(position=(0, 800))
+monster12 = Hunter(position=(0, 900))
 monster13 = Hunter(position=(100, 0))
 monster14 = Hunter(position=(100, 0))
 monster15 = Hunter(position=(200, 0))
@@ -160,6 +178,8 @@ bullet_pos = player.rect.center
 bullet_right = right_Bullet(bullet_pos)
 bullet_left = left_Bullet(bullet_pos)
 
+pygame.mixer.Sound.play(pew)
+
 bullet = pygame.sprite.Group()
 bullet.add(bullet_right)
 bullet.add(bullet_left)
@@ -183,11 +203,14 @@ global number_of_enemy
 number_of_enemy = len(enemies)
 global a
 a = 1
-
+global respawn_level
+respawn_level = 0
+global end
+end = "a"
 while running:
     clock.tick(FPS)
     victory = 0
-    space_loop = "a"
+
     last = pygame.time.get_ticks()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -197,6 +220,9 @@ while running:
         elif event.type == my_event_id:
             for entity in bullet:
                 entity.kill()
+
+            pygame.mixer.Sound.play(pew)
+
 
             bullet_pos = player.rect.center
             bullet_right = right_Bullet(bullet_pos)
@@ -265,7 +291,7 @@ while running:
 
     screen.fill(WHITE)
 
-    if level == 2 and a == 1:
+    if level == 2 and a == 1 and respawn_level == 0:
         monster = Hunter(position=(0, 0))
         monster1 = Hunter(position=(1280, 1000))
         all_sprites.add(monster)
@@ -275,7 +301,7 @@ while running:
         number_of_enemy = len(enemies)
         a += 1
 
-    if level == 3 and a == 2:
+    if level == 3 and a == 2 and respawn_level == 0:
         monster = Hunter(position=(0, 0))
         monster1 = Hunter(position=(1280, 1000))
         monster2 = Hunter(position=(1280, 0))
@@ -288,7 +314,7 @@ while running:
         number_of_enemy = len(enemies)
         a += 1
 
-    if level == 4 and a == 3:
+    if level == 4 and a == 3 and respawn_level == 0:
         monster = Hunter(position=(0, 0))
         monster1 = Hunter(position=(1280, 1000))
         monster2 = Hunter(position=(1280, 0))
@@ -304,7 +330,7 @@ while running:
         number_of_enemy = len(enemies)
         a += 1
 
-    if level == 5 and a == 4:
+    if level == 5 and a == 4 and respawn_level == 0:
         monster = Hunter(position=(0, 0))
         monster1 = Hunter(position=(1280, 1000))
         monster2 = Hunter(position=(1280, 0))
@@ -318,7 +344,7 @@ while running:
         monster10 = Hunter(position=(0, 700))
         monster11 = Hunter(position=(0, 800))
         monster12 = Hunter(position=(0, 900))
-        monster13 = Hunter(position=(100,0))
+        monster13 = Hunter(position=(100, 0))
         monster14 = Hunter(position=(100, 0))
         monster15 = Hunter(position=(200, 0))
         monster16 = Hunter(position=(300, 0))
@@ -468,21 +494,22 @@ while running:
         number_of_enemy = len(enemies)
         a += 1
 
-    if level == 6 and a == 5:
-        screen.blit(vic, textRect)
-        screen.fill(WHITE)
-        victory = ""
-
     if pygame.sprite.spritecollideany(player, enemies):
+        screen.fill(WHITE)
+        pygame.display.update()
         screen.blit(text, textRect)
-
-        space_loop = ""
-
+        pygame.display.update()
         for entity in all_sprites:
             entity.kill()
+        end = ""
+        pygame.mixer.Sound.play(death)
+        pygame.mixer.Sound.play(defeat)
+
+
 
     elif pygame.sprite.groupcollide(bullet, enemies, False, True):
         number_of_enemy -= 1
+        pygame.mixer.Sound.play(bug_death)
 
     for entity in all_sprites:
         screen.blit(entity.image, entity.rect)
@@ -492,7 +519,14 @@ while running:
     text_level_rec.center = (1080, 900)
     screen.blit(text_level, text_level_rec)
 
-    if len(enemies) == 0 and space_loop != "":
+    if level == 6 and a == 5 and respawn_level == 0:
+
+        screen.blit(vic, textRect)
+        pygame.mixer.Sound.play(congrat)
+
+        victory = ""
+
+    elif len(enemies) == 0 and end != "" and respawn_level == 0:
         screen.fill((0, 0, 0))
         level += 1
         text_level = font.render('Level {}'.format(level), True, BLACK, WHITE)
@@ -506,6 +540,19 @@ while running:
                 entity.kill()
 
     while victory == "":
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    pygame.quit()
+                    sys.exit()
+
+            pygame.display.update()
+    while end == "":
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -514,45 +561,28 @@ while running:
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    respawn_level = 1
+                    level = None
+                    a = None
                     screen.fill(WHITE)
-                    for entity in bullet:
-                        entity.kill()
-                    player = Player(position=(500, 300))
-                    monster = Hunter(position=(200, 200))
+
+                    player = Player(position=(350, 220))
+                    monster = Hunter(position=(0, 0))
+
                     bullet_pos = player.rect.center
                     bullet_right = right_Bullet(bullet_pos)
                     bullet_left = left_Bullet(bullet_pos)
+
                     enemies.add(monster)
+
                     all_sprites.add(player)
                     all_sprites.add(monster)
 
+                    level = 1
+                    a = 1
 
-            pygame.display.update()
-    while space_loop == "":
+                    end = "a"
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-                running = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    respawn_level = 1
-                    screen.fill(WHITE)
-                    for entity in bullet:
-                        entity.kill()
-                    player = Player(position=(500, 300))
-                    monster = Hunter(position=(200, 200))
-                    bullet_pos = player.rect.center
-                    bullet_right = right_Bullet(bullet_pos)
-                    bullet_left = left_Bullet(bullet_pos)
-                    enemies.add(monster)
-                    all_sprites.add(player)
-                    all_sprites.add(monster)
-
-
-            pygame.display.update()
+                    pygame.display.update()
 
     pygame.display.update()
     FramePerSec.tick(FPS)
